@@ -1,7 +1,7 @@
 module ApplicationHelper
   def full_title(page_title)
     title = 'Ruby on Rails Tutorial Sample App'
-    title = "#{title} | #{page_title}" if page_title
+    title = "#{page_title} | #{title}" if page_title.present?
     return title
   end
 end
