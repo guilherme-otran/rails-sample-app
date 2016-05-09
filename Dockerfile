@@ -27,10 +27,21 @@ COPY . ./
 # from the outside.
 EXPOSE 3000
 VOLUME /opt/app-root/public
+VOLUME /opt/app-root/log
+
+USER root
+RUN chown -R 1001:0 /opt/app-root/db && \
+    chmod -R 755 /opt/app-root/db && \
+    chown -R 1001:0 /opt/app-root/log && \
+    chown -R 1001:0 /opt/app-root/public
+
+USER 1001
+
+RUN ["/opt/app-root/entrypoint.sh", "bundle exec rake db:create db:migrate"]
 
 # Configure an entry point, so we don't need to specify
 # "bundle exec" for each of our commands.
-ENTRYPOINT ["bundle", "exec"]
+ENTRYPOINT ["/opt/app-root/entrypoint.sh"]
 
 # The main command to run when the container starts. Also
 # tell the Rails dev server to bind to all interfaces by
