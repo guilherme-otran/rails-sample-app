@@ -18,7 +18,7 @@ WORKDIR /opt/app-root
 # will be cached unless changes to one of those two files
 # are made.
 COPY Gemfile Gemfile.lock ./
-RUN bundle install --path ./bundle
+RUN bundle config build.nokogiri --use-system-libraries && bundle install --path ./bundle
 
 # Copy the main application
 COPY . ./
