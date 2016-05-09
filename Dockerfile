@@ -1,11 +1,11 @@
-FROM ruby:2.2.3
+FROM guilhermeotran/ruby23centos7
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
 # Debian image, we use apt-get to install those.
-RUN apt-get update && apt-get install -y \
-  build-essential \
-  nodejs
+# RUN apt-get update && apt-get install -y \
+#  build-essential \
+#  nodejs
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
